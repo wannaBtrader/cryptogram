@@ -339,6 +339,7 @@ class BinanceWebSocketApiProcessStreams:
 
 class Binance(base.Processor):
     def config(self, config):
+        self.name = config['name']
         self.api_key = config["api_key"]
         self.api_secret = config["api_secret"]
         self.message = config["message"]
@@ -349,6 +350,8 @@ class Binance(base.Processor):
         self.notify(text=text)
 
     def run(self):
+        LOG.info("Starting binance %s", self.name)
+
         fmt = BinanceWebSocketApiProcessStreams()
         fmt.order_trade = self._notify
 

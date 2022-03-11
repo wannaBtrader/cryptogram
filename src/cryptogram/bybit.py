@@ -63,6 +63,7 @@ exec2 = [
 
 class ByBit(base.Processor):
     def config(self, config):
+        self.name = config['name']
         self.api_key = config["api_key"]
         self.api_secret = config["api_secret"]
         self.message = config["message"]
@@ -84,7 +85,7 @@ class ByBit(base.Processor):
             logging_level=logging.DEBUG,
         )
 
-        LOG.info("Starting bybit")
+        LOG.info("Starting bybit %s", self.name)
 
         while True:
             data = ws_auth.fetch("execution")
